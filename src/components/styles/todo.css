@@ -13,6 +13,7 @@
     gap: 0.3rem;
 }
 .todo .todo-pass .todo-box{
+    position: relative;
     width: 28%;
     height: 60% ;
     background-color: skyblue;
@@ -21,8 +22,10 @@
     flex-direction: column;
     border-radius: 4%;
     box-shadow: 5px 5px 5px grey;
+    padding: 1rem;
     
 }
+
 .todo form{
     width: 30%;
     height: 50%;

@@ -2,5 +2,8 @@
 .todobox .btns{
     font-size: xx-large;
     cursor: pointer;
+    background-color: tomato;
+    position: relative;
+    bottom: 0;
 
-} 
+}
