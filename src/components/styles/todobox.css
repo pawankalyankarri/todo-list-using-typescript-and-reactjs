@@ -1,9 +1,49 @@
-
-.todobox .btns{
-    font-size: xx-large;
-    cursor: pointer;
-    background-color: tomato;
-    position: relative;
-    bottom: 0;
-
+/* .todo .todo-pass .todo-box{
+    width: 28%;
+    height: 60% ;
+    background-color: skyblue;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 4%;
+    box-shadow: 5px 5px 5px grey;
+    padding: 1rem;
+    
+} */
+ .todobox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
+.todobox .h3{
+    text-align: center;
+    font-weight: bold;
+    font-size:xx-large;
+}
+.todobox #todo-text{
+    font-size: large;
+    padding: 0.8rem;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto; 
+}
+.btns .edit,.btns .delete{
+    width: 45%;
+    height: 2rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+.btns .edit .editicon ,.btns .delete .deleteicon{
+    width: 70%;
+    height: 70%;
+    cursor: pointer;
+}
+

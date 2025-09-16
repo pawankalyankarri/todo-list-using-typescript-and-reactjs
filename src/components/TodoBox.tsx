@@ -1,5 +1,8 @@
 import { useRef, useState } from "react";
 import "./styles/todobox.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 type Todo = {
   id: number;
@@ -10,7 +13,7 @@ type Todo = {
 type childProps = {
   todo: Todo;
   getChild: (id: number) => void;
-  editChild: (id: number, todo: string) => void;
+  editChild: (id: number, todo: string,title:string) => void;
 };
 const TodoBox = ({ todo, getChild, editChild }: childProps) => {
   let [flag, setFlag] = useState<boolean>(false);
@@ -18,31 +21,38 @@ const TodoBox = ({ todo, getChild, editChild }: childProps) => {
   function handleEdit(
     id: number,
     todo: string,
+    title : string,
     e: React.MouseEvent<HTMLButtonElement>
   ): void {
-    console.log(id);
-    console.log(e);
+    // console.log(e);
     let ele = (document.querySelector("#todo-text") as HTMLElement) || null;
+
+    // const editTodoElement = document.getElementById('edittodo');
+    // if (editTodoElement) {
+    //   editTodoElement.style.display = "block";
+    // }
+    editChild(id,todo,title)
+
     if (ele) {
       ele.contentEditable = "true";
     }
     if (flag) {
       if (textRef.current) {
         console.log("text", textRef.current.value);
-        editChild(id, textRef.current?.value);
+        
       }
     }
     setFlag(!flag);
   }
   return (
     <div className="todobox">
-      <h3>{todo.title}</h3>
-      <p id="todo-text">{todo.todo}</p>
+      <h3 className="h3" >{todo.title}</h3>
+      <p  id="todo-text">{todo.todo}</p>
       <div className="btns">
-        <button onClick={(event) => handleEdit(todo.id, todo.todo, event)}>
-          Edit
+        <button className="edit" onClick={(event) => handleEdit(todo.id, todo.todo,todo.title, event)}>
+            <FontAwesomeIcon className="editicon" icon={faEdit} />
         </button>
-        <button onClick={() => getChild(todo.id)}>Delete</button>
+        <button className="delete" onClick={() => getChild(todo.id)}><FontAwesomeIcon className="deleteicon" icon={faTrash} /></button>
       </div>
     </div>
   );

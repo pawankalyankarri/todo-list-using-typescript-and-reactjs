@@ -1,0 +1,45 @@
+.edittodo{
+    display: block;
+    width: 100%;
+    height: 40%;
+    z-index: 1;
+    /* background-color: red; */
+}
+.edittodo .edit-form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.edittodo .edit-form .edit-container{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+.edittodo .edit-form .edit-container input[type="text"]{
+    width: 80%;
+    height: 2rem;
+    font-size: 1rem;
+    padding: 0.4rem;
+    margin:0.2rem
+
+}
+
+.edittodo .edit-form .edit-container input[type="submit"]{
+    width: 50%;
+    height: 2rem;
+    font-size: 1.2rem;
+    padding: 0.3rem;
+    cursor: pointer;
+    background-color: blue;
+    border: none;
+    border-radius: 4%;
+    font-weight: bold;
+    color:white;
+    margin:0.2rem
+
+}
