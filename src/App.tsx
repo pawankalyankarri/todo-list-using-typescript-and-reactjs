@@ -11,7 +11,7 @@ function App() {
         <Route path="" element={<Sidebar />}>
           <Route path="todo" element={<Todo />} >
           <Route path="edittodo" element={<EditTodo/>}/>
-          </Route>
+        </Route>
           
         </Route>
       </Routes>

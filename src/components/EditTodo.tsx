@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./styles/edittodo.css";
 
-
-
-
 const EditTodo = () => {
   const [todotitle, setTodotitle] = useState<string>("");
   const [todotext, setTodotext] = useState<string>("");
@@ -13,15 +10,17 @@ const EditTodo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const state = location.state as { id: number; todo: string; title: string } | undefined;
+    const state = location.state as
+      | { id: number; todo: string; title: string }
+      | undefined;
 
     if (state) {
-      const { id,todo, title } = state;
+      const { todo, title } = state;
 
-      setTodotext(todo ?? "");    
+      setTodotext(todo ?? "");
       setTodotitle(title ?? "");
     } else {
-      navigate("/");  
+      navigate("/");
     }
   }, []);
 
@@ -29,8 +28,9 @@ const EditTodo = () => {
     e.preventDefault();
     // console.log("Updated title:", todotitle);
     // console.log("Updated text:", todotext);
-    navigate('/todo/',{state:{id:location.state.id,todo:todotext,title:todotitle}})
-    
+    navigate("/todo/", {
+      state: { id: location.state.id, todo: todotext, title: todotitle },
+    });
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {

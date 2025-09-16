@@ -15,6 +15,18 @@ const Todo = () => {
   let titleRef = useRef<HTMLInputElement>(null);
   let [show, setShow] = useState<boolean>(false);
   let navigate = useNavigate();
+  const todoColors: string[] = [
+    "#FFEBEE",
+    "#FFF3E0",
+    "#FFFDE7",
+    "#E8F5E9",
+    "#E3F2FD",
+    "#F3E5F5",
+    "#FCE4EC",
+    "#E0F7FA",
+    "#FFF0F5",
+    "#F9FBE7",
+  ];
   let [todos, setTodos] = useState<Todo[]>(() => {
     let data = localStorage.getItem("tasks");
     return data ? JSON.parse(data) : [];
@@ -51,7 +63,12 @@ const Todo = () => {
 
   function handlebtn(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    if (inputRef.current && inputRef.current.value.trim() !== "") {
+    if (
+      inputRef.current &&
+      inputRef.current.value.trim() !== "" &&
+      titleRef.current &&
+      titleRef.current.value.trim() !== ""
+    ) {
       let newTodo = {
         id: cnt,
         title: titleRef.current?.value || "",
@@ -76,11 +93,16 @@ const Todo = () => {
     setTodos(todos.filter((obj) => obj.id != id));
   }
 
-  function handleEdit(id: number, todo: string, title: string) {
+  function handleEdit(id: number, todo: string, title: string,flag:boolean) {
     // console.log('id,todo',id,todo)
 
     let container = document.querySelector(".container") as HTMLElement | null;
     if (container) container.style.display = "none";
+    console.log('todo',flag)
+    if(flag){
+      let container = document.querySelector(".container") as HTMLElement | null;
+      if (container) container.style.display = "none";
+    }
     setTodos(
       todos.map((obj: Todo) => {
         if (obj.id === id) {
@@ -95,7 +117,7 @@ const Todo = () => {
   return (
     <div className="todo">
       <Outlet />
-      <div className="container">
+      <div className="container" >
         <div className="todo-pass">
           {show ? (
             <form action="" onSubmit={handlebtn} className="form">
@@ -103,27 +125,36 @@ const Todo = () => {
                 <input type="text" ref={titleRef} placeholder="title" />
                 <input type="text" ref={inputRef} placeholder="todo" />
 
-                <input type="submit" value='Add Todo' />
+                <input type="submit" value="Add Todo" />
               </div>
             </form>
           ) : (
-            <div className="show-form">
-              <h1 className="h1" onClick={() => setShow(!show)}>➕</h1>
+            <div className="show-form" onClick={() => setShow(!show)}>
+              <h1 className="h1">➕</h1>
             </div>
           )}
-          {show? '': <>
-            {todos.map((obj, idx) => {
-            return (
-              <div key={idx} className="todo-box">
-                <TodoBox
-                  todo={obj}
-                  getChild={getChildId}
-                  editChild={handleEdit}
-                />
-              </div>
-            );
-          })}
-            </>}
+          {show ? (
+            ""
+          ) : (
+            <>
+              {todos.map((obj, idx) => {
+                const bgColor = todoColors[idx % todoColors.length];
+                return (
+                  <div
+                    key={idx}
+                    className="todo-box"
+                    style={{ backgroundColor: bgColor }}
+                  >
+                    <TodoBox
+                      todo={obj}
+                      getChild={getChildId}
+                      editChild={handleEdit}
+                    />
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>
