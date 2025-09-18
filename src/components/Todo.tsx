@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./styles/todo.css";
+// import "./styles/todo.css";
 import TodoBox from "./TodoBox";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
@@ -33,7 +33,14 @@ const Todo = () => {
   });
   let [cnt, setCnt] = useState<number>(() => {
     const data = localStorage.getItem("tasks");
-    return data ? JSON.parse(data).length + 1 : 1;
+    // return data ? JSON.parse(data).length + 1 : 1;
+    const todos: Todo[] = data ? JSON.parse(data) : [];
+  if (todos.length > 0) {
+    const maxId = Math.max(...todos.map((t) => t.id));
+    return maxId + 1;
+  } else {
+    return 1;
+  }
   });
 
   let location = useLocation();
@@ -111,26 +118,28 @@ const Todo = () => {
         return obj;
       })
     );
-    navigate("/todo/edittodo", { state: { id: id, todo: todo, title: title } });
+    navigate("/home/todo/edittodo", { state: { id: id, todo: todo, title: title } });
   }
 
   return (
-    <div className="todo">
+    <div className="todo  w-full p-1">
       <Outlet />
-      <div className="container" >
-        <div className="todo-pass">
+      <div className=" p-1.5" >
+        <div className="todo-pass h-64 grid gap-2  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {show ? (
-            <form action="" onSubmit={handlebtn} className="form">
+            <form action="" onSubmit={handlebtn} className="form flex justify-center items-center w-full col-span-3 h-screen">
               <div className="read-data">
-                <input type="text" ref={titleRef} placeholder="title" />
-                <input type="text" ref={inputRef} placeholder="todo" />
+                <input type="text" ref={titleRef} placeholder="Title" className=" border-b-4 m-1 border-sky-500 rounded p-2 outline-none w-lg placeholder:text-gray-500 placeholder:italic"/>
+                <input type="text" ref={inputRef} placeholder="Write some thing here" className="rounded m-1 p-2 w-lg border-b-4 outline-none border-purple-500 placeholder:italic placeholder:text-gray-500"   />
 
-                <input type="submit" value="Add Todo" />
+                <div className="flex justify-center w-lg rounded m-1  text-blue-50">
+                  <input type="submit" className="rounded w-auto shadow-lg px-5 bg-blue-700 hover:bg-blue-600 active:bg-green-400 font-bold text-lg p-2" value="Add Todo" />
+                </div>
               </div>
             </form>
           ) : (
-            <div className="show-form" onClick={() => setShow(!show)}>
-              <h1 className="h1">➕</h1>
+            <div className="show-form shadow-lg h-64 rounded cursor-pointer flex justify-center items-center bg-blue-300 " onClick={() => setShow(!show)}>
+              <h1 className="h1 font-bold text-4xl">➕</h1>
             </div>
           )}
           {show ? (
@@ -142,7 +151,7 @@ const Todo = () => {
                 return (
                   <div
                     key={idx}
-                    className="todo-box"
+                    className="todo-box shadow-lg  h-64 "
                     style={{ backgroundColor: bgColor }}
                   >
                     <TodoBox

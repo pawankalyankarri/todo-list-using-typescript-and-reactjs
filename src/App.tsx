@@ -1,14 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+// import "./App.css";
 import Todo from "./components/Todo";
 import Sidebar from "./components/Sidebar";
 import EditTodo from "./components/EditTodo";
+import LoginPage from "./components/LoginPage";
 
 function App() {
   return (
-    <div className="app">
+    <div className=" w-full h-full app ">
       <Routes>
-        <Route path="" element={<Sidebar />}>
+        <Route path="" element={<LoginPage/>}/>
+        <Route path="home" element={<Sidebar />}>
           <Route path="todo" element={<Todo />} >
           <Route path="edittodo" element={<EditTodo/>}/>
         </Route>

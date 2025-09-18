@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./styles/todobox.css";
+// import "./styles/todobox.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -33,18 +33,20 @@ const TodoBox = ({ todo, getChild, editChild }: childProps) => {
     setFlag(!flag);
   }
   return (
-    <div className="todobox">
-      <h3 className="h3">{todo.title}</h3>
-      <p id="todo-text">{todo.todo}</p>
-      <div className="btns">
+    <div className="todobox p-2 flex flex-col items-center justify-between h-full ">
+      <div>
+        <h3 className="h3 font-bold text-3xl mb-1 text-center font-mono  ">{todo.title}</h3>
+        <p id="todo-text " className="font-serif p-0.5">{todo.todo}</p>
+      </div>
+      <div className="btns flex justify-around w-full items-center p-2">
         <button
           className="edit"
           onClick={() => handleEdit(todo.id, todo.todo, todo.title)}
         >
-          <FontAwesomeIcon className="editicon" icon={faEdit} />
+          <FontAwesomeIcon className="editicon cursor-pointer text-xl " icon={faEdit} />
         </button>
         <button className="delete" onClick={() => getChild(todo.id)}>
-          <FontAwesomeIcon className="deleteicon" icon={faTrash} />
+          <FontAwesomeIcon className="deleteicon cursor-pointer text-xl  " icon={faTrash} />
         </button>
       </div>
     </div>
