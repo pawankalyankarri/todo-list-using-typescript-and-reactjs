@@ -39,7 +39,7 @@ const LoginPage = () => {
           <p className="text-xs">Enter valid user name & password to continue</p>
         </div>
         <div className="">
-          <form action="" className="">
+          <form action="" className="" onSubmit={handleSubmit}>
             <div className="flex flex-col w-auto">
               <div className="outline-2 outline-gray-500 m-auto p-1 my-2 rounded shadow-lg">
                 <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
